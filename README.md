@@ -1,6 +1,6 @@
-# gcal
+# GCal
 
-A Clojure library designed to ... well, that part is up to you.
+Clojure interface to Google Calendar API
 
 ## Usage
 
