@@ -6,7 +6,10 @@
 
 ;; TODO get this from oauth2
 
-(def auth-token "ya29.AHES6ZRc3lAIpVhwrA4skfT8p66khzqicayRXDj-2ICwNFtbOIXr9w")
+(def auth-token "ya29.AHES6ZTCzwafmaxC5yRpjXU17ZNC7mWizs-Hkc0gIj7Fa_D6DjLGhA")
+
+(defn merge-auth [headers token]
+  (assoc headers :Authorization (str "Bearer " token)))
 
 (defn make-url [url] 
   (apply format "%s%s" [base-url url]))
@@ -16,9 +19,8 @@
 (defn get-request [url & params]
   (let [http-client (http/create-client)]
     (with-open [client http-client]
-      (let [response (http/GET client url
-                       :headers 
-                         {:Authorization (str "Bearer " auth-token)})]
+      (let [default-headers {}
+            response (http/GET client url :headers (merge-auth default-headers auth-token))]
     (-> response
         http/await
         http/string)))))
