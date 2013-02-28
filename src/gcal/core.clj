@@ -25,11 +25,13 @@
         http/await
         http/string)))))
 
-(defn post-request [url text]
+(defn post-request [url]
   (with-open [client (http/create-client)]
     (let [default-headers {}
-          response (http/POST client url :body {:text text})]
-   response)))
+          response (http/POST client url :headers (merge-auth default-headers auth-token))]
+   (-> response
+       http/await
+       http/string))))
 
 ;; List of all calendars 
 
@@ -49,8 +51,10 @@
     (json/parse-string
       (get-request))))
 
+(def purl "https://www.googleapis.com/calendar/v3/calendars/6nasdg9sebcv9oqt6qu8hcdgi8%40group.calendar.google.com/events/quickAdd?text=Appointment+at+Somewhere+on+Februray+29th+11am-11%3A25am")
+
 (defn quick-add [calendar]
   ;; https://www.googleapis.com/calendar/v3/calendars/calendarId/events/quickAdd
   (let [t "Appointment at Somewhere on Februray 29th 10am-10:25am"]
-    (post-request)))
+    (post-request purl)))
 
