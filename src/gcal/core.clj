@@ -16,6 +16,11 @@
 
 ;; "https://www.googleapis.com/calendar/v3/users/me/calendarList"
 
+;; Abstract the duplication
+(defmacro do-request [url & params]
+  `(let [http-client# (http/create-client)]
+   ))
+
 (defn get-request [url & params]
   (let [http-client (http/create-client)]
     (with-open [client http-client]
