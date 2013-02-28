@@ -6,7 +6,7 @@
 
 ;; TODO get this from oauth2
 
-(def auth-token "ya29.AHES6ZTCzwafmaxC5yRpjXU17ZNC7mWizs-Hkc0gIj7Fa_D6DjLGhA")
+(def auth-token "ya29.AHES6ZQcu6KPHO2u5oWISQBth-QcX9kv4SZy-Bx8xNgff9Q")
 
 (defn merge-auth [headers token]
   (assoc headers :Authorization (str "Bearer " token)))
@@ -24,6 +24,12 @@
     (-> response
         http/await
         http/string)))))
+
+(defn post-request [url text]
+  (with-open [client (http/create-client)]
+    (let [default-headers {}
+          response (http/POST client url :body {:text text})]
+   response)))
 
 ;; List of all calendars 
 
@@ -43,7 +49,8 @@
     (json/parse-string
       (get-request))))
 
-    
-
-
+(defn quick-add [calendar]
+  ;; https://www.googleapis.com/calendar/v3/calendars/calendarId/events/quickAdd
+  (let [t "Appointment at Somewhere on Februray 29th 10am-10:25am"]
+    (post-request)))
 
