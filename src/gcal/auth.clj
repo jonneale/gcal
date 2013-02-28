@@ -3,6 +3,10 @@
 
 (def login-uri "https://accounts.google.com")
 
+(def calendar-scope "https://www.googleapis.com/auth/calendar")
+
+(def calendar-read-only "https://www.googleapis.com/auth/calendar.readonly")
+
 (def google-com-oauth2
   {:authorization-uri (str login-uri "/o/oauth2/auth")
    :access-token-uri (str login-uri "/o/oauth2/token")
@@ -10,7 +14,7 @@
    :client-id ""
    :client-secret ""
    :access-query-param :access_token
-   :scope ["https://www.googleapis.com/auth/userinfo.email"]
+   :scope [calendar-scope]
    :grant-type "authorization_code"
    :access-type "online"
    :approval_prompt ""})
@@ -20,8 +24,4 @@
 
 (defn google-access-token [request]
   (oauth2/get-access-token google-com-oauth2 (:params request) auth-req))
-
-(defn- google-user-email [access-token]
-  (let [response (oauth2/get "https://www.googleapis.com/oauth2/v1/userinfo" {:oauth access-token})]
-    response))
 

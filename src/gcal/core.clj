@@ -9,32 +9,30 @@
 (def auth-token "ya29.AHES6ZRc3lAIpVhwrA4skfT8p66khzqicayRXDj-2ICwNFtbOIXr9w")
 
 (defn make-url [url] 
-  (apply format "%s%s" base-url url))
+  (apply format "%s%s" [base-url url]))
 
-(defn get-request []
-  (with-open [client (http/create-client)]
-    (let [response (http/GET client "https://www.googleapis.com/calendar/v3/users/me/calendarList"
-                   :headers
-                     {:Authorization (str "Bearer " auth-token)})]
+;; "https://www.googleapis.com/calendar/v3/users/me/calendarList"
+
+(defn get-request [url & params]
+  (let [http-client (http/create-client)]
+    (with-open [client http-client]
+      (let [response (http/GET client url
+                       :headers 
+                         {:Authorization (str "Bearer " auth-token)})]
     (-> response
-      http/await
-      http/string))))
+        http/await
+        http/string)))))
 
 ;; List of all calendars 
 
-(defn calendar-list []
+(defn calendar-list [token]
   (let [url (make-url "/users/me/calendarList")]
     (json/parse-string
-      (get-request))))
+      (get-request url {:token token}))))
 
 ;; Get a single calendar 
 
-;; Test cal
 (def idx "6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com")
-
-;; Events 
-
-;; https://www.googleapis.com/calendar/v3/calendars/calendarId/events
 
 (defn events
   "Returns a list of all events"
