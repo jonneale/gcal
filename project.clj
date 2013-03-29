@@ -6,4 +6,5 @@
   :dependencies [[org.clojure/clojure "1.5.0"]
                  [stuarth/clj-oauth2 "0.3.2"]
                  [cheshire "4.0.3"]
+                 [clj-time "0.5.0"]
                  [http.async.client "0.5.2"]])

@@ -4,7 +4,10 @@
 
 (def base-url "https://www.googleapis.com/calendar/v3")
 
-(def auth-token "ya29.AHES6ZQNYOIMBVCgNmA0zvzCq_zNjDGKsdbZcD2VcUfQm8Ee46Zxg7KV")
+(def auth-token "ya29.AHES6ZQ1R6MyaszdhfyCU6jwtyAbKW7NRfSRwfPNZEH13Ik")
+
+(defn decode [url]
+  (java.net.URLDecoder/decode url))
 
 (defn merge-auth [headers token]
   (assoc headers :Authorization (str "Bearer " token)))
@@ -33,10 +36,11 @@
     (with-open [client http-client]
       (let [default-headers {}
             response (http/GET client url
+                      :body params
                       :headers (merge-auth default-headers auth-token))]
-    (-> response
-        http/await
-        http/string)))))
+              (-> response
+                  http/await
+                  http/string)))))
 
 (defn post-request [url token params]
   (with-open [client (http/create-client)]
@@ -44,9 +48,7 @@
           response (http/POST client url
             :body params
             :headers (merge-auth default-headers auth-token))]
-   (-> response
-       http/await
-       http/string))))
+     (-> response http/await http/string))))
 
 (defn as-json [response]
   (json/parse-string response))
@@ -57,9 +59,9 @@
   "Performs a simple get request
    returning a repsonse as JSON with
    keywords as keys"
-  [url token]
+  [url token & params]
   (let [full-url (make-url url)
-        response (get-request full-url token)]
+        response (get-request full-url token (or (first params) {}))]
     (->> response
          as-json
          with-keywords)))

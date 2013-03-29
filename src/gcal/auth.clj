@@ -26,7 +26,7 @@
 (defn offline-access-uri []
   (str (auth-uri) "&access_type=offline&approval_prompt=force"))
 
-(def auth-resp {:code "4/72CCS7viVg-4qmwF7xd9mby4XHFG.wkqN6_iWQc0fOl05ti8ZT3ZNyB5rewI"})
+(def auth-resp {:code "4/B_Q4tydr2mWUmqOzy2IO69lKiQ7e.osPq936dhw4fOl05ti8ZT3YxH_ZrewI"})
 
 (defn access-token []
   (:access-token
