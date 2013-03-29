@@ -20,13 +20,13 @@ GCal requires an OAuth Token
 A list of all available calendars
 
 ```clojure
-(calendars/calendars "OAUTH TOKEN")
+(calendars/all "OAUTH TOKEN")
 ```
 
 Show a single calendar. Your calendar id will look something like "6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com"
 
 ```clojure
-(calendars/calendars "OAUTH TOKEN" "CALENDAR_ID")
+(calendars/show "OAUTH TOKEN" "CALENDAR_ID")
 ```
 
 ### Events

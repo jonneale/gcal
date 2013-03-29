@@ -8,6 +8,10 @@
   ([token] (api/simple-request "/users/me/calendarList" token))
   ([token id] (api/simple-request (str "/calendars/" id) token)))
 
+(defn all [token] (calendars token))
+
+(defn show [token id] (calendars token id))
+
 (defn calendar-list
   "Returns only the name and id"
   [token]
