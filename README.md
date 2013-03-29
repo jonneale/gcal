@@ -12,8 +12,6 @@ GCal requires an OAuth Token
 
 ### Calendars
 
-All calendar related code is found in the gcal.calendars namespace
-
 ```clojure
 (ns myapp.core (:use [gcal.core :as gcal]))
 ```
@@ -37,7 +35,7 @@ Show a single calendar. Your calendar id will look something like "6nasdg9sebcv9
   (:use [gcal.events :as events]))
 ```
 
-A list of all events for a given calendar (TODO date range queries)
+A list of all events for a given calendar
 
 ```clojure
 (events/all "OAUTH TOKEN" "CALENDAR_ID")
