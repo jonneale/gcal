@@ -32,16 +32,15 @@ Show a single calendar. Your calendar id will look something like "6nasdg9sebcv9
 
 ### Events
 
-A list of all events for a given calendar (TODO date range queries)
-
 ```clojure
 (ns myapp.core
   (:use [gcal.events :as events]))
+```
 
-;; all events for a calendar with id 6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com
+A list of all events for a given calendar (TODO date range queries)
 
-(events/all "6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com")
-
+```clojure
+(events/all "OAUTH TOKEN" "CALENDAR_ID")
 ```
 
 ## License
