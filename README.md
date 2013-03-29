@@ -13,7 +13,8 @@ GCal requires an OAuth Token
 ### Calendars
 
 ```clojure
-(ns myapp.core (:use [gcal.core :as gcal]))
+(ns myapp.core
+  (:use [gcal.core :as gcal]))
 ```
 
 A list of all available calendars
