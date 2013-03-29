@@ -43,3 +43,11 @@
 ;; Todays events
 
 ;; This weeks events
+
+
+(defn quick-add
+  "Quick add an event to the calendar"
+  [token cal text]
+  (api/simple-post
+    (format "/calendars/%s/events/quickAdd" cal)
+    token {:text text}))

@@ -42,6 +42,12 @@ A list of all events for a given calendar
 (events/all "OAUTH TOKEN" "CALENDAR_ID")
 ```
 
+Create a new quick add event
+
+```clojure
+(events/quick-add "OAUTH TOKEN" "CALENDAR_ID" "my awesome event")
+```
+
 ## License
 
 Copyright © 2013 Google Owain Lewis
