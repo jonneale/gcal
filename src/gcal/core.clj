@@ -4,8 +4,7 @@
 
 (def base-url "https://www.googleapis.com/calendar/v3")
 
-;; TODO fix this
-(def auth-token "ya29.AHES6ZQup5kJSA__MYUeKr_8QQgZ53TpMrxHC2PBEwl_GjJJVg-fu2Pt")
+(def auth-token "ya29.AHES6ZQNYOIMBVCgNmA0zvzCq_zNjDGKsdbZcD2VcUfQm8Ee46Zxg7KV")
 
 (defn merge-auth [headers token]
   (assoc headers :Authorization (str "Bearer " token)))
@@ -23,6 +22,11 @@
            (conj [] (with-keywords (first v)))
            v)]))
      m))
+
+(defn get-> [url]
+  (let [http-client (http/create-client :follow-redirects true)]
+    (with-open [client http-client]
+      (-> (http/GET client url) http/await http/string))))
 
 (defn get-request [url token & params]
   (let [http-client (http/create-client)]

@@ -4,28 +4,33 @@ Clojure interface to Google Calendar API
 
 IN PROGRESS
 
-## Usage
+## Getting started
 
-### Auth 
+### Auth
 
-TODO(
-
-Google Calendar uses OAuth2. 
+GCal requires an OAuth Token
 
 ### Calendars
 
-A list of all available calendars 
+All calendar related code is found in the gcal.calendars namespace
 
 ```clojure
-(ns myapp.core
-  (:use [gcal.core :as gcal]))
-  
-;; A list of all calendars 
-(gcal/calendar-list "AUTH_TOKEN")
-
+(ns myapp.core (:use [gcal.core :as gcal]))
 ```
 
-### Events 
+A list of all available calendars
+
+```clojure
+(calendars "OAUTH TOKEN")
+```
+
+Show a single calendar. Your calendar id will look something like "6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com"
+
+```clojure
+(calendars "OAUTH TOKEN" "CALENDAR_ID")
+```
+
+### Events
 
 A list of all events for a given calendar (TODO date range queries)
 
@@ -41,7 +46,7 @@ A list of all events for a given calendar (TODO date range queries)
 
 ## License
 
-Copyright © 2013 FIXME
+Copyright © 2013 Google Owain Lewis
 
 Distributed under the Eclipse Public License, the same as Clojure.
 

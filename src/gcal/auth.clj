@@ -1,5 +1,5 @@
 (ns gcal.auth
-  (:require [http.async.client :as http]
+  (:require [gcal.core :as core]
             [clj-oauth2.client :as oauth2]))
 
 (def login-uri "https://accounts.google.com")
@@ -24,9 +24,9 @@
   (:uri auth-req))
 
 (defn offline-access-uri []
-  (str (auth-uri) "&access_type=offline"))
+  (str (auth-uri) "&access_type=offline&approval_prompt=force"))
 
-(def auth-resp {:code "4/QHPei2biBFQR3rWGCU_m6cA5MNyc.UsYEzz5aXdUSOl05ti8ZT3Y7JEdgewI"})
+(def auth-resp {:code "4/72CCS7viVg-4qmwF7xd9mby4XHFG.wkqN6_iWQc0fOl05ti8ZT3ZNyB5rewI"})
 
 (defn access-token []
   (:access-token

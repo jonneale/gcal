@@ -3,22 +3,19 @@
 
 ;; List of all calendars
 
+(defn calendars
+  "Fetch calendar information"
+  ([token] (api/simple-request "/users/me/calendarList" token))
+  ([token id] (api/simple-request (str "/calendars/" id) token)))
+
 (defn calendar-list
-  "Return a list of calendars"
+  "Returns only the name and id"
   [token]
-  (api/simple-request "/users/me/calendarList" token))
-
-;; Get a single calendar
-;; GET https://www.googleapis.com/calendar/v3/calendars/calendarId
-
-(def idx "6nasdg9sebcv9oqt6qu8hcdgi8@group.calendar.google.com")
-
-(defn get-calendar
-  "Returns metadata for a calendar"
-  [id token]
-  (api/simple-request (str "/calendars/" id) token))
+  (into {}
+    (map #((juxt :description :id) %)
+      (:items (calendars token)))))
 
 (defn create-calendar
-  [summary token]
+  [token summary]
   (api/simple-post "/calendar/v3/calendars" token {:summary summary}))
 
