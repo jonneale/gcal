@@ -3,12 +3,15 @@
 
 ;; List of all calendars
 
-(defn calendar
+(defn calendars
   "Fetch calendar information"
   ([token] (api/simple-request "/users/me/calendarList" token))
   ([token id] (api/simple-request (str "/calendars/" id) token)))
 
 (defn all [token] (calendars token))
+
+;; Alias
+(def my-calendars all)
 
 (defn show [token id] (calendars token id))
 
