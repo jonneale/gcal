@@ -8,7 +8,23 @@ IN PROGRESS
 
 ### Auth
 
-GCal requires an OAuth Token
+GCal requires an OAuth Token. The library provides some helpers for this.
+
+Generate the OAuth URL
+
+```clojure
+(require [gcal.auth :as auth])
+
+;; Get the URL to visit
+(auth/offline-access-uri)
+
+;; Visit the URL and grab the token from the callback URL
+
+(generate-access-token YOURTOKEN)
+
+;; => your access token
+
+```
 
 ### Calendars
 
