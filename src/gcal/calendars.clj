@@ -3,7 +3,7 @@
 
 ;; List of all calendars
 
-(defn calendars
+(defn calendar
   "Fetch calendar information"
   ([token] (api/simple-request "/users/me/calendarList" token))
   ([token id] (api/simple-request (str "/calendars/" id) token)))
@@ -17,7 +17,7 @@
   [token]
   (into {}
     (map #((juxt :description :id) %)
-      (:items (calendars token)))))
+      (:items (calendar token)))))
 
 (defn create-calendar
   [token summary]

@@ -2,11 +2,16 @@
   (:require [gcal.core :as core]
             [clj-oauth2.client :as oauth2]))
 
+;; OAuth authentication logic
+;; ****************************************************
+
 (def login-uri "https://accounts.google.com")
 
 (def calendar-scope "https://www.googleapis.com/auth/calendar")
 
 (def calendar-read-only "https://www.googleapis.com/auth/calendar.readonly")
+
+;; ****************************************************
 
 (def google-oauth2
   {:authorization-uri (str login-uri "/o/oauth2/auth")
@@ -18,17 +23,23 @@
    :scope [calendar-scope]
    :grant-type "authorization_code"})
 
-(def auth-req (oauth2/make-auth-request google-oauth2))
+(def auth-req 
+  (oauth2/make-auth-request google-oauth2))
 
-(defn auth-uri []
-  (:uri auth-req))
+(defn auth-uri [] (:uri auth-req))
 
 (defn offline-access-uri []
-  (str (auth-uri) "&access_type=offline&approval_prompt=force"))
+  (let [extra-params "&access_type=offline&approval_prompt=force"]
+    (str (auth-uri) extra-params)))
 
-(def auth-resp {:code "4/B_Q4tydr2mWUmqOzy2IO69lKiQ7e.osPq936dhw4fOl05ti8ZT3YxH_ZrewI"})
+;; ****************************************************
 
-(defn access-token []
-  (:access-token
-    (oauth2/get-access-token google-oauth2 auth-resp auth-req)))
+;; Code is the long oauth return code obtained
+;; from the redirect URL
+;; e.g "4/A-VS2g35TU0DXsZEWZcO0VDkmMdj.IvpIekMQSO0fOl05ti8ZT3a9xKgEggI"
+(defn generate-access-token [code]
+  (let [token (oauth2/get-access-token 
+                 google-oauth2 {:code code} auth-req)]
+    (->> token 
+        :access-token)))
 
