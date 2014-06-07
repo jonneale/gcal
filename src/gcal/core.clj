@@ -4,7 +4,7 @@
 
 (def base-url "https://www.googleapis.com/calendar/v3")
 
-(def auth-token "ya29.AHES6ZQUKUdPdSXPGlBkgJydB5Puqglb8rP4jfDxfmrby4wPG0hnrA")
+(def auth-token "")
 
 (defn decode [url]
   (java.net.URLDecoder/decode url))
