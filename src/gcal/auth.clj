@@ -17,8 +17,8 @@
   {:authorization-uri (str login-uri "/o/oauth2/auth")
    :access-token-uri (str login-uri "/o/oauth2/token")
    :redirect-uri "https://localhost/oauth2callback"
-   :client-id "645463994659.apps.googleusercontent.com"
-   :client-secret "yn4R7dz9PrPvRYHFzN84Lg81"
+   :client-id ""
+   :client-secret ""
    :access-query-param :access_token
    :scope [calendar-scope]
    :grant-type "authorization_code"})
